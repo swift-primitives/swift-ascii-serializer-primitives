@@ -4,7 +4,7 @@ import PackageDescription
 
 // ASCII Serializer Primitives - Tier 18
 //
-// Subject-first ASCII serialization types: ASCII.Decimal.Serializer.
+// Subject-first ASCII serialization types: ASCII.Decimal.Serializer, ASCII.Hexadecimal.Serializer.
 // Bridges ascii-primitives (Tier 0) with serializer-primitives.
 
 let package = Package(
@@ -20,6 +20,10 @@ let package = Package(
         .library(
             name: "ASCII Decimal Serializer Primitives",
             targets: ["ASCII Decimal Serializer Primitives"]
+        ),
+        .library(
+            name: "ASCII Hexadecimal Serializer Primitives",
+            targets: ["ASCII Hexadecimal Serializer Primitives"]
         ),
         .library(
             name: "Serializable Integer Primitives",
@@ -44,6 +48,13 @@ let package = Package(
                 .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
             ]
         ),
+        .target(
+            name: "ASCII Hexadecimal Serializer Primitives",
+            dependencies: [
+                .product(name: "Serializer Primitives Core", package: "swift-serializer-primitives"),
+                .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
+            ]
+        ),
 
         // MARK: - Conformances
 
@@ -60,6 +71,7 @@ let package = Package(
             name: "ASCII Serializer Primitives",
             dependencies: [
                 "ASCII Decimal Serializer Primitives",
+                "ASCII Hexadecimal Serializer Primitives",
                 "Serializable Integer Primitives",
             ]
         ),
@@ -70,6 +82,18 @@ let package = Package(
             name: "ASCII Decimal Serializer Primitives Tests",
             dependencies: [
                 "ASCII Decimal Serializer Primitives",
+            ]
+        ),
+        .testTarget(
+            name: "ASCII Hexadecimal Serializer Primitives Tests",
+            dependencies: [
+                "ASCII Hexadecimal Serializer Primitives",
+            ]
+        ),
+        .testTarget(
+            name: "Serializable Integer Primitives Tests",
+            dependencies: [
+                "Serializable Integer Primitives",
             ]
         ),
     ],

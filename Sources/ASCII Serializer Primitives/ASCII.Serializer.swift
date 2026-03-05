@@ -11,5 +11,6 @@ extension ASCII {
     /// This namespace exists for future composed/convenience access patterns.
     /// Concrete serializers live in their subject domains:
     /// - ``ASCII/Decimal/Serializer``
+    /// - ``ASCII/Hexadecimal/Serializer``
     public enum Serializer {}
 }

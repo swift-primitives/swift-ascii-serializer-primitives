@@ -33,6 +33,10 @@ let package = Package(
             name: "ASCII Serializer Primitives",
             targets: ["ASCII Serializer Primitives"]
         ),
+        .library(
+            name: "ASCII Serializer Primitives Test Support",
+            targets: ["ASCII Serializer Primitives Test Support"]
+        ),
     ],
     dependencies: [
         .package(path: "../swift-ascii-primitives"),
@@ -95,6 +99,15 @@ let package = Package(
             dependencies: [
                 "Serializable Integer Primitives",
             ]
+        ),
+
+        // MARK: - Test Support
+        .target(
+            name: "ASCII Serializer Primitives Test Support",
+            dependencies: [
+                "ASCII Serializer Primitives",
+            ],
+            path: "Tests/Support"
         ),
     ],
     swiftLanguageModes: [.v6]

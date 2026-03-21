@@ -43,20 +43,28 @@ let package = Package(
         .package(path: "../swift-serializer-primitives"),
     ],
     targets: [
-        // MARK: - Subject Domains
+        // MARK: - Core
 
         .target(
-            name: "ASCII Decimal Serializer Primitives",
+            name: "ASCII Serializer Primitives Core",
             dependencies: [
                 .product(name: "Serializer Primitives Core", package: "swift-serializer-primitives"),
                 .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
             ]
         ),
+
+        // MARK: - Subject Domains
+
+        .target(
+            name: "ASCII Decimal Serializer Primitives",
+            dependencies: [
+                "ASCII Serializer Primitives Core",
+            ]
+        ),
         .target(
             name: "ASCII Hexadecimal Serializer Primitives",
             dependencies: [
-                .product(name: "Serializer Primitives Core", package: "swift-serializer-primitives"),
-                .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
+                "ASCII Serializer Primitives Core",
             ]
         ),
 

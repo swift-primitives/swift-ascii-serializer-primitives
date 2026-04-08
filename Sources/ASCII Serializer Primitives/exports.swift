@@ -1,3 +1,4 @@
 @_exported public import ASCII_Decimal_Serializer_Primitives
 @_exported public import ASCII_Hexadecimal_Serializer_Primitives
 @_exported public import Serializable_Integer_Primitives
+@_exported public import Binary_ASCII_Serializable_Primitives

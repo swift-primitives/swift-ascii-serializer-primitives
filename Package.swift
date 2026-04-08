@@ -34,6 +34,10 @@ let package = Package(
             targets: ["Serializable Integer Primitives"]
         ),
         .library(
+            name: "Binary ASCII Serializable Primitives",
+            targets: ["Binary ASCII Serializable Primitives"]
+        ),
+        .library(
             name: "ASCII Serializer Primitives",
             targets: ["ASCII Serializer Primitives"]
         ),
@@ -45,6 +49,7 @@ let package = Package(
     dependencies: [
         .package(path: "../swift-ascii-primitives"),
         .package(path: "../swift-serializer-primitives"),
+        .package(path: "../swift-binary-primitives"),
     ],
     targets: [
         // MARK: - Core
@@ -81,6 +86,15 @@ let package = Package(
             ]
         ),
 
+        // MARK: - Binary.ASCII.Serializable (deprecated, release-readiness shim)
+
+        .target(
+            name: "Binary ASCII Serializable Primitives",
+            dependencies: [
+                .product(name: "Binary Primitives", package: "swift-binary-primitives"),
+            ]
+        ),
+
         // MARK: - Umbrella
 
         .target(
@@ -89,6 +103,7 @@ let package = Package(
                 "ASCII Decimal Serializer Primitives",
                 "ASCII Hexadecimal Serializer Primitives",
                 "Serializable Integer Primitives",
+                "Binary ASCII Serializable Primitives",
             ]
         ),
 

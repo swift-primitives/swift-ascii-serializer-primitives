@@ -18,20 +18,34 @@ extension ASCII.Decimal {
     /// let bytes = serializer.serialize(8080)  // [0x38, 0x30, 0x38, 0x30]
     /// ```
     public struct Serializer<T: FixedWidthInteger>: Sendable {
+        /// Creates a decimal serializer for `T`.
         @inlinable
         public init() {}
     }
 }
 
 extension ASCII.Decimal.Serializer: Serializer.`Protocol` {
+    /// The integer type whose decimal representation is written.
     public typealias Output = T
-    public typealias Buffer = [UInt8]
+
+    /// The `ASCII.Code` buffer the decimal digits are appended to.
+    public typealias Buffer = [ASCII.Code]
+
+    /// The failure type; decimal serialization never fails.
     public typealias Failure = Never
 
+    /// Appends the decimal ASCII digits of `output` to `buffer`.
+    ///
+    /// `0` is written as the single digit `'0'`; negative signed values are
+    /// prefixed with `'-'` and their magnitude is written.
+    ///
+    /// - Parameters:
+    ///   - output: The integer to serialize as decimal digits.
+    ///   - buffer: The `ASCII.Code` buffer to append the digits to.
     @inlinable
-    public func serialize(_ output: T, into buffer: inout [UInt8]) {
+    public func serialize(_ output: T, into buffer: inout [ASCII.Code]) {
         guard output != 0 else {
-            buffer.append(0x30)
+            buffer.append(ASCII.Code(0x30))
             return
         }
 
@@ -46,13 +60,13 @@ extension ASCII.Decimal.Serializer: Serializer.`Protocol` {
             var magnitude = UInt64(bitPattern: Int64(truncatingIfNeeded: output))
             magnitude = ~magnitude &+ 1
             while magnitude > 0 {
-                buffer.append(UInt8(truncatingIfNeeded: magnitude % 10) &+ 0x30)
+                buffer.append(ASCII.Code(UInt8(truncatingIfNeeded: magnitude % 10) &+ 0x30))
                 magnitude /= 10
             }
-            buffer.append(0x2D) // '-'
+            buffer.append(ASCII.Code(0x2D))  // '-'
         } else {
             while value > 0 {
-                buffer.append(UInt8(truncatingIfNeeded: value % 10) &+ 0x30)
+                buffer.append(ASCII.Code(UInt8(truncatingIfNeeded: value % 10) &+ 0x30))
                 value /= 10
             }
         }

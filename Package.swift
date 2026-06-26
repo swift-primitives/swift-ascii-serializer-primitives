@@ -30,6 +30,14 @@ let package = Package(
             targets: ["ASCII Hexadecimal Serializer Primitives"]
         ),
         .library(
+            name: "ASCII Binary Serializer Primitives",
+            targets: ["ASCII Binary Serializer Primitives"]
+        ),
+        .library(
+            name: "ASCII Octal Serializer Primitives",
+            targets: ["ASCII Octal Serializer Primitives"]
+        ),
+        .library(
             name: "Serializable Integer Primitives",
             targets: ["Serializable Integer Primitives"]
         ),
@@ -80,6 +88,20 @@ let package = Package(
                 .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
             ]
         ),
+        .target(
+            name: "ASCII Binary Serializer Primitives",
+            dependencies: [
+                .product(name: "Serializer Primitives", package: "swift-serializer-primitives"),
+                .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
+            ]
+        ),
+        .target(
+            name: "ASCII Octal Serializer Primitives",
+            dependencies: [
+                .product(name: "Serializer Primitives", package: "swift-serializer-primitives"),
+                .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
+            ]
+        ),
 
         // MARK: - Conformances
 
@@ -111,6 +133,8 @@ let package = Package(
                 "Serializable ASCII Primitives",
                 "ASCII Decimal Serializer Primitives",
                 "ASCII Hexadecimal Serializer Primitives",
+                "ASCII Binary Serializer Primitives",
+                "ASCII Octal Serializer Primitives",
                 "Serializable Integer Primitives",
                 "Binary ASCII Serializable Primitives",
             ]
@@ -128,6 +152,18 @@ let package = Package(
             name: "ASCII Hexadecimal Serializer Primitives Tests",
             dependencies: [
                 "ASCII Hexadecimal Serializer Primitives",
+            ]
+        ),
+        .testTarget(
+            name: "ASCII Binary Serializer Primitives Tests",
+            dependencies: [
+                "ASCII Binary Serializer Primitives",
+            ]
+        ),
+        .testTarget(
+            name: "ASCII Octal Serializer Primitives Tests",
+            dependencies: [
+                "ASCII Octal Serializer Primitives",
             ]
         ),
         .testTarget(

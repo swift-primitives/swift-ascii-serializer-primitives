@@ -69,6 +69,7 @@ let package = Package(
             dependencies: [
                 .product(name: "Serializer Primitives", package: "swift-serializer-primitives"),
                 .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
+                .product(name: "Binary Serializable Primitives", package: "swift-binary-serializer-primitives"),
             ]
         ),
 
@@ -170,6 +171,15 @@ let package = Package(
             name: "Serializable Integer Primitives Tests",
             dependencies: [
                 "Serializable Integer Primitives",
+            ]
+        ),
+        .testTarget(
+            name: "Serializable ASCII Primitives Tests",
+            dependencies: [
+                "Serializable ASCII Primitives",
+                .product(name: "Serializer Primitives", package: "swift-serializer-primitives"),
+                .product(name: "ASCII Primitives", package: "swift-ascii-primitives"),
+                .product(name: "Binary Serializable Primitives", package: "swift-binary-serializer-primitives"),
             ]
         ),
 

@@ -40,3 +40,35 @@ where
         return buffer
     }
 }
+
+// MARK: - Byte-Substrate Accessor (.serialized)
+//
+// Byte-substrate twin of `asciiCodes`. The canonical ASCII serializers write
+// into `[ASCII.Code]`; `.serialized` projects each code to its `Byte` for
+// callers that need a plain `[Byte]` (e.g. `String(decoding: x.serialized,
+// as: UTF8.self)`). Replacement for the deprecated `Binary.ASCII.Serializable`
+// `[Byte]` conveniences. [PRIM-FOUND-004]-clean — projection stays in the byte
+// domain (`ASCII.Code.byte`), never reaching `Swift.String`.
+
+extension Serializable where Serializer.Buffer == [ASCII.Code], Serializer.Output == Self {
+    /// The ASCII serialization of this value as raw bytes.
+    @inlinable
+    public var serialized: [Byte] {
+        asciiCodes.map(\.byte)
+    }
+}
+
+extension Serializable
+where
+    Serializer.Buffer == [ASCII.Code],
+    Serializer.Output == Self,
+    Serializer.Failure == Never
+{
+    /// The ASCII serialization of this value as raw bytes.
+    ///
+    /// Infallible version for serializers that cannot fail.
+    @inlinable
+    public var serialized: [Byte] {
+        asciiCodes.map(\.byte)
+    }
+}

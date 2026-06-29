@@ -1,20 +1,17 @@
 // Binary.ASCII.swift
 // swift-ascii-serializer-primitives
 //
-// ASCII operations namespace for UInt8.
+// ASCII operations namespace.
 
 extension Binary {
-    /// ASCII operations namespace for UInt8.
+    /// ASCII operations namespace.
     ///
-    /// Provides all ASCII character classification, manipulation, and constant access methods
-    /// for byte-level operations per INCITS 4-1986 (US-ASCII standard).
+    /// Hosts the ASCII serialization, parsing, equality, and access facilities
+    /// declared in extensions across this package and `swift-ascii` (L3), per
+    /// INCITS 4-1986 (US-ASCII standard).
     ///
-    /// ## Access Patterns
-    ///
-    /// - **Static**: `UInt8.ascii.A` - For constants and static methods
-    /// - **Instance**: `byte.ascii.isLetter` - For instance classification
-    public struct ASCII {
-        /// The wrapped byte value.
-        public let byte: UInt8
-    }
+    /// This is a pure namespace and carries no stored value. The byte-domain
+    /// value substrate is `ASCII.Code` (`swift-ascii-primitives`); a raw byte is
+    /// `Byte` / `UInt8`.
+    public enum ASCII {}
 }

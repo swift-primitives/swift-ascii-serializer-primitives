@@ -8,29 +8,42 @@
 public import ASCII_Primitives
 
 extension ASCII {
-    /// A type whose canonical serializer emits ASCII-substrate byte content.
+    /// A type that serializes itself to ASCII-code output ([FAM-012]).
     ///
-    /// Top-level format-specific sibling protocol per family-Codable
-    /// convention [FAM-001/006]: flat, no associated types, no refinement
-    /// of canonical-attachment protocols. The **write peer of**
-    /// ``ASCII/Parseable`` — both are non-refining peers of the canonical
-    /// `Serializable` / `Parseable` attachment protocols.
+    /// Self-contained format sibling per the serialize/parse codec-attachment
+    /// model: `ASCII.Serializable` carries its OWN static serialize verb, keyed
+    /// by the sink's element type (`ASCII.Code` ⇒ text). It is flat — no
+    /// associated types ([FAM-001]) — and refines nothing. The write peer of
+    /// ``ASCII/Parseable``.
     ///
-    /// Generic algorithms dispatching on ASCII-substrate serialization can
-    /// require `T: ASCII.Serializable`. The canonical serializer instance is
-    /// supplied by the conformer as a static accessor, by convention
-    /// (no protocol requirement carries the associated-type slot, per
-    /// [FAM-001]).
+    /// A type conforms to exactly the format siblings it has: a text-only value
+    /// conforms `ASCII.Serializable` alone; a value with both a wire and a text
+    /// form (e.g. an IP address) conforms `Binary.Serializable` and
+    /// `ASCII.Serializable` as ordinary peers — there is no canonical tier to
+    /// decline and no wire-from-text bridge.
     ///
-    /// ## Symmetry with `ASCII.Parseable`
+    /// The format is chosen by the buffer's element type at the call site:
     ///
-    /// A type may conform to both `ASCII.Serializable` (write) and
-    /// ``ASCII/Parseable`` (read) — per the family-Codable convention's
-    /// byte-stream split-pair shape. Serialization is reached via the
-    /// canonical `Serializable` accessor (`Self.serializer`) and the
-    /// `.serialized` / `asciiCodes` conveniences in this module; an
-    /// ASCII-serializable value is additionally usable as
-    /// `Binary.Serializable` — ASCII bytes are bytes — via the bridge in
-    /// this module.
-    public protocol Serializable {}
+    /// ```swift
+    /// var text: [ASCII.Code] = []
+    /// RFC_791.IPv4.Address.serialize(address, into: &text)   // "192.168.1.1"
+    /// ```
+    ///
+    /// The `.asciiCodes` / `.serialized` conveniences in this module derive from
+    /// this verb.
+    public protocol Serializable {
+        /// Serializes a value into an ASCII-code buffer.
+        ///
+        /// Appends the ASCII-code representation to `buffer` without clearing
+        /// existing content. Implementations must be deterministic and
+        /// infallible for valid values.
+        ///
+        /// - Parameters:
+        ///   - serializable: The value to serialize.
+        ///   - buffer: The buffer to append ASCII codes to.
+        static func serialize<Buffer: RangeReplaceableCollection>(
+            _ serializable: borrowing Self,
+            into buffer: inout Buffer
+        ) where Buffer.Element == ASCII.Code
+    }
 }

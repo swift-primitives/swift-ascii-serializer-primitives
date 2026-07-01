@@ -1,60 +1,64 @@
 // Serializable+ASCII.RawRepresentable.swift
 // swift-ascii-serializer-primitives
 //
-// The option-(B) RawRepresentable-backed default ASCII serializer. Default
-// `serializer` accessors that give any `Serializable` + `ASCII.Serializable`
-// conformer whose `Swift.RawRepresentable` `RawValue` is `String` or `[Byte]`
-// a canonical ASCII serializer for free. Net effect: such a conformer needs
-// only the conformance declarations (~3 lines) and inherits `.serialized`,
-// `asciiCodes`, and the `Binary.Serializable` bridge.
+// The RawRepresentable-backed default for `ASCII.Serializable`. Any conformer
+// whose `Swift.RawRepresentable` `RawValue` is `String` or `[Byte]` inherits the
+// `ASCII.Serializable` format verb — `serialize(_:into:)` — for free, emitting
+// the rawValue's ASCII codes directly into the sink. Net effect: such a
+// conformer needs only the conformance declarations (~2–3 lines) and inherits
+// `.serialized`, `asciiCodes`, and the `Binary.Serializable` bridge.
+//
+// This is a permanent, FLAT default: it provides the `ASCII.Serializable` verb
+// itself, not a `static var serializer` routed through a transitional bridge.
 //
 // [PRIM-FOUND-004]-clean: a conformer's existing `String` / `[Byte]` rawValue
 // is consumed as serialize INPUT (`String → .utf8`, `[Byte]` directly); no
 // `Swift.String`-producing accessor is exposed at L1.
 
 public import ASCII_Primitives
-public import Serializer_Primitives
 
 // MARK: - String RawValue
 
-extension Serializable
+extension ASCII.Serializable
 where
-    Self: ASCII.Serializable,
     Self: Swift.RawRepresentable,
     Self.RawValue == String
 {
-    /// The canonical ASCII serializer for a `String`-backed `RawRepresentable`
-    /// value: projects the rawValue's UTF-8 bytes to `[ASCII.Code]`.
+    /// The canonical ASCII serialization for a `String`-backed
+    /// `RawRepresentable` value: appends the rawValue's UTF-8 bytes, projected
+    /// to `ASCII.Code`, to the sink.
     @inlinable
-    public static var serializer: ASCII.RawRepresentable.Serializer<Self> {
-        ASCII.RawRepresentable.Serializer { value, buffer in
-            for byte in value.rawValue.utf8 {
-                buffer.append(ASCII.Code(byte))
-            }
+    public static func serialize<Buffer: RangeReplaceableCollection>(
+        _ value: borrowing Self,
+        into buffer: inout Buffer
+    ) where Buffer.Element == ASCII.Code {
+        for byte in value.rawValue.utf8 {
+            buffer.append(ASCII.Code(byte))
         }
     }
 }
 
 // MARK: - [Byte] RawValue
 
-extension Serializable
+extension ASCII.Serializable
 where
-    Self: ASCII.Serializable,
     Self: Swift.RawRepresentable,
     Self.RawValue == [Byte]
 {
-    /// The canonical ASCII serializer for a `[Byte]`-backed `RawRepresentable`
-    /// value: projects each rawValue byte to its `ASCII.Code`.
+    /// The canonical ASCII serialization for a `[Byte]`-backed
+    /// `RawRepresentable` value: appends each rawValue byte, projected to its
+    /// `ASCII.Code`, to the sink.
     ///
-    /// Bytes are projected unchecked — the serializer is infallible
-    /// (`Failure == Never`) and uses `ASCII.Code` purely as the byte-substrate
-    /// buffer ("ASCII bytes are bytes"); `.serialized` recovers the exact bytes.
+    /// Bytes are projected unchecked — `ASCII.Code` is used purely as the
+    /// byte-substrate ("ASCII bytes are bytes"); `.serialized` recovers the
+    /// exact bytes.
     @inlinable
-    public static var serializer: ASCII.RawRepresentable.Serializer<Self> {
-        ASCII.RawRepresentable.Serializer { value, buffer in
-            for byte in value.rawValue {
-                buffer.append(ASCII.Code(unchecked: byte))
-            }
+    public static func serialize<Buffer: RangeReplaceableCollection>(
+        _ value: borrowing Self,
+        into buffer: inout Buffer
+    ) where Buffer.Element == ASCII.Code {
+        for byte in value.rawValue {
+            buffer.append(ASCII.Code(unchecked: byte))
         }
     }
 }

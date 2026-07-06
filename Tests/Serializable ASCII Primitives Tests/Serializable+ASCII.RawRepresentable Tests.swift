@@ -39,7 +39,6 @@ enum Command: String, ASCII.Serializable {
 
 struct Frame: Swift.RawRepresentable, ASCII.Serializable {
     let rawValue: [Byte]
-    init(rawValue: [Byte]) { self.rawValue = rawValue }
 }
 
 // MARK: - Demonstration (String RawValue)
@@ -65,6 +64,10 @@ extension Command.Test.Unit {
     func `flat default output equals the rawValue UTF-8 projection`() {
         let value = Command.ok
         // The retired serializer bridge's projection: rawValue.utf8 -> ASCII.Code.
+        // reason: test reproduces the flat default's own bottom-out projection
+        // (String rawValue's UTF-8 view) to assert byte-equivalence; no typed
+        // retag()/map() path exists from Swift.RawRepresentable.rawValue.
+        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         let expected = value.rawValue.utf8.map { ASCII.Code($0) }
         #expect(value.asciiCodes == expected)
     }
@@ -93,6 +96,10 @@ extension Frame.Test.Unit {
     func `flat default output equals the rawValue byte projection`() {
         let value = Frame(rawValue: [0x3E, 0x4F, 0x4B])
         // The retired serializer bridge's projection: each [Byte] -> ASCII.Code.
+        // reason: test reproduces the flat default's own bottom-out projection
+        // ([Byte] rawValue mapped directly) to assert byte-equivalence; no typed
+        // retag()/map() path exists from Swift.RawRepresentable.rawValue.
+        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         let expected = value.rawValue.map { ASCII.Code(unchecked: $0) }
         #expect(value.asciiCodes == expected)
     }

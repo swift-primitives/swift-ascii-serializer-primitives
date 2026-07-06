@@ -32,6 +32,10 @@ where
         _ value: borrowing Self,
         into buffer: inout Buffer
     ) where Buffer.Element == ASCII.Code {
+        // reason: this IS the bottom-out implementation — the String rawValue's
+        // UTF-8 view is the canonical byte source for the flat serialize default;
+        // no retag()/map() path exists from Swift.RawRepresentable.rawValue.
+        // swiftlint:disable:next chained_rawvalue_access_anti_pattern
         for byte in value.rawValue.utf8 {
             buffer.append(ASCII.Code(byte))
         }

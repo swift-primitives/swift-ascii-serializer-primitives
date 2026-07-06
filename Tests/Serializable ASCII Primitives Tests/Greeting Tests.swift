@@ -7,12 +7,11 @@
 // `.serialized: [Byte]` accessor, `RangeReplaceableCollection.append(serialized:)`,
 // and an explicit `Binary.Serializable` peer verb (ASCII+Binary peer model).
 
-import Testing
-
 import ASCII_Primitives
 import Binary_Serializable_Primitives
 import Serializable_ASCII_Primitives
 import Serializer_Primitives
+import Testing
 
 // MARK: - Fixture
 

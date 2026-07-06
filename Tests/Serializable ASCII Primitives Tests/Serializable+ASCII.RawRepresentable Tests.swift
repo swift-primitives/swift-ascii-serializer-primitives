@@ -19,10 +19,9 @@
 // `serialize(_:into:)` and produce identical bytes, so Swift reports a witness
 // ambiguity — surfaced for a design decision rather than resolved by guessing.
 
-import Testing
-
 import ASCII_Primitives
 import Serializable_ASCII_Primitives
+import Testing
 
 // MARK: - Fixtures
 //

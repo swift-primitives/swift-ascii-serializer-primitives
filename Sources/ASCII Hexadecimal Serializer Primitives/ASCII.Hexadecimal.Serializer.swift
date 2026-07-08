@@ -85,7 +85,7 @@ extension ASCII.Hexadecimal.Serializer: Serializer.`Protocol` {
 
     /// Maps a nibble value (0–15) to its lowercase ASCII hex code.
     @inlinable
-    static func _hexCode(_ nibble: UInt8) -> ASCII.Code {
+    package static func _hexCode(_ nibble: UInt8) -> ASCII.Code {
         ASCII.Code(nibble < 10 ? nibble &+ 0x30 : nibble &+ 0x57)
     }
 }

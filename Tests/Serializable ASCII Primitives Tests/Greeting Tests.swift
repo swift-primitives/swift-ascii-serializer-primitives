@@ -22,7 +22,7 @@ struct Greeting: Sendable {
 extension Greeting {
     struct Serializer: Sendable {
         @inlinable
-        init() {}
+        package init() {}
     }
 }
 

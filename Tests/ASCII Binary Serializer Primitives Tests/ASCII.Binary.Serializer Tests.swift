@@ -2,15 +2,15 @@ import ASCII_Binary_Serializer_Primitives
 import ASCII_Primitives
 import Testing
 
-@Suite("ASCII.Binary.Serializer")
-struct ASCIIBinarySerializerTests {
+@Suite
+struct `ASCII.Binary.Serializer Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
 }
 
 // MARK: - Unit Tests
 
-extension ASCIIBinarySerializerTests.Unit {
+extension `ASCII.Binary.Serializer Tests`.Unit {
     @Test
     func `serializes zero`() {
         let serializer = ASCII.Binary.Serializer<UInt8>()
@@ -50,7 +50,7 @@ extension ASCIIBinarySerializerTests.Unit {
 
 // MARK: - Edge Cases
 
-extension ASCIIBinarySerializerTests.EdgeCase {
+extension `ASCII.Binary.Serializer Tests`.EdgeCase {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Binary.Serializer<UInt8>()

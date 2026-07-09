@@ -2,15 +2,15 @@ import ASCII_Octal_Serializer_Primitives
 import ASCII_Primitives
 import Testing
 
-@Suite("ASCII.Octal.Serializer")
-struct ASCIIOctalSerializerTests {
+@Suite
+struct `ASCII.Octal.Serializer Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
 }
 
 // MARK: - Unit Tests
 
-extension ASCIIOctalSerializerTests.Unit {
+extension `ASCII.Octal.Serializer Tests`.Unit {
     @Test
     func `serializes zero`() {
         let serializer = ASCII.Octal.Serializer<UInt8>()
@@ -50,7 +50,7 @@ extension ASCIIOctalSerializerTests.Unit {
 
 // MARK: - Edge Cases
 
-extension ASCIIOctalSerializerTests.EdgeCase {
+extension `ASCII.Octal.Serializer Tests`.EdgeCase {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Octal.Serializer<UInt8>()

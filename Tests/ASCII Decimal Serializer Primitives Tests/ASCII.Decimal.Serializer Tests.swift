@@ -2,15 +2,15 @@ import ASCII_Decimal_Serializer_Primitives
 import ASCII_Primitives
 import Testing
 
-@Suite("ASCII.Decimal.Serializer")
-struct ASCIIDecimalSerializerTests {
+@Suite
+struct `ASCII.Decimal.Serializer Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
 }
 
 // MARK: - Unit Tests
 
-extension ASCIIDecimalSerializerTests.Unit {
+extension `ASCII.Decimal.Serializer Tests`.Unit {
     @Test
     func `serializes zero`() {
         let serializer = ASCII.Decimal.Serializer<UInt8>()
@@ -50,7 +50,7 @@ extension ASCIIDecimalSerializerTests.Unit {
 
 // MARK: - Edge Cases
 
-extension ASCIIDecimalSerializerTests.EdgeCase {
+extension `ASCII.Decimal.Serializer Tests`.EdgeCase {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Decimal.Serializer<UInt8>()

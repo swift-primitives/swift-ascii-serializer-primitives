@@ -2,15 +2,15 @@ import ASCII_Hexadecimal_Serializer_Primitives
 import ASCII_Primitives
 import Testing
 
-@Suite("ASCII.Hexadecimal.Serializer")
-struct ASCIIHexadecimalSerializerTests {
+@Suite
+struct `ASCII.Hexadecimal.Serializer Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
 }
 
 // MARK: - Unit Tests
 
-extension ASCIIHexadecimalSerializerTests.Unit {
+extension `ASCII.Hexadecimal.Serializer Tests`.Unit {
     @Test
     func `serializes zero`() {
         let serializer = ASCII.Hexadecimal.Serializer<UInt8>()
@@ -57,7 +57,7 @@ extension ASCIIHexadecimalSerializerTests.Unit {
 
 // MARK: - Edge Cases
 
-extension ASCIIHexadecimalSerializerTests.EdgeCase {
+extension `ASCII.Hexadecimal.Serializer Tests`.EdgeCase {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Hexadecimal.Serializer<UInt8>()

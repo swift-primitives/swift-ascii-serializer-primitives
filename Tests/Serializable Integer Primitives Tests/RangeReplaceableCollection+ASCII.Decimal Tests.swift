@@ -5,13 +5,13 @@ import Testing
 // Coverage for the `append(contentsOf: FixedWidthInteger)` convenience over
 // `ASCII.Decimal.Serializer` (relocated from swift-byte-primitives' Numeric+Byte).
 
-@Suite("RangeReplaceableCollection+ASCII.Decimal")
-struct RangeReplaceableCollectionASCIIDecimalTests {
+@Suite
+struct `RangeReplaceableCollection+ASCII.Decimal Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
 }
 
-extension RangeReplaceableCollectionASCIIDecimalTests.Unit {
+extension `RangeReplaceableCollection+ASCII.Decimal Tests`.Unit {
     @Test
     func `appends small positive integer as ASCII decimal digits`() {
         var buffer: [ASCII.Code] = []
@@ -41,7 +41,7 @@ extension RangeReplaceableCollectionASCIIDecimalTests.Unit {
     }
 }
 
-extension RangeReplaceableCollectionASCIIDecimalTests.EdgeCase {
+extension `RangeReplaceableCollection+ASCII.Decimal Tests`.EdgeCase {
     @Test
     func `appends zero as a single '0'`() {
         var buffer: [ASCII.Code] = []

@@ -63,16 +63,17 @@ Requires Swift 6.3.1 and macOS 26 / iOS 26 / tvOS 26 / watchOS 26 / visionOS 26 
 
 ## Architecture
 
-Six library products plus a test-support target, composed over the `ASCII.Code`, `Serializer`, and `Binary` primitives. Import the umbrella `ASCII Serializer Primitives` for the whole surface, or a single sub-product to keep the dependency narrow.
+Eight library products (an umbrella, six subject-domain libraries, and a test-support target), composed over the `ASCII.Code`, `Serializer`, and `Binary` primitives. Import the umbrella `ASCII Serializer Primitives` for the whole surface, or a single sub-product to keep the dependency narrow. There is no deprecated or compatibility product in this catalogue — every product below is current.
 
 | Product | Target | Purpose |
 |---------|--------|---------|
 | `ASCII Serializer Primitives` | `Sources/ASCII Serializer Primitives/` | Umbrella that re-exports every sub-target below. |
 | `ASCII Decimal Serializer Primitives` | `Sources/ASCII Decimal Serializer Primitives/` | `ASCII.Decimal.Serializer<T>` — writes the decimal ASCII digits of a `FixedWidthInteger`. |
 | `ASCII Hexadecimal Serializer Primitives` | `Sources/ASCII Hexadecimal Serializer Primitives/` | `ASCII.Hexadecimal.Serializer<T>` — writes the lowercase hexadecimal ASCII digits of a `FixedWidthInteger`. |
+| `ASCII Binary Serializer Primitives` | `Sources/ASCII Binary Serializer Primitives/` | Writes the base-2 ASCII digits of a `FixedWidthInteger`. |
+| `ASCII Octal Serializer Primitives` | `Sources/ASCII Octal Serializer Primitives/` | Writes the base-8 ASCII digits of a `FixedWidthInteger`. |
 | `Serializable ASCII Primitives` | `Sources/Serializable ASCII Primitives/` | The `asciiCodes` accessor on any `Serializable` whose buffer is `[ASCII.Code]`. |
 | `Serializable Integer Primitives` | `Sources/Serializable Integer Primitives/` | `Serializable` conformances for the standard-library integers, plus `RangeReplaceableCollection.append(contentsOf:)` for integers into an `[ASCII.Code]` buffer. |
-| `Binary ASCII Serializable Primitives` | `Sources/Binary ASCII Serializable Primitives/` | The deprecated `Binary.ASCII.Serializable` shim with its `RawRepresentable` and `Wrapper` helpers. |
 | `ASCII Serializer Primitives Test Support` | `Tests/Support/` | Re-exports the umbrella for test consumers. |
 
 Foundation-free.

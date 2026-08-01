@@ -36,6 +36,9 @@ where
         // UTF-8 view is the canonical byte source for the flat serialize default;
         // no retag()/map() path exists from Swift.RawRepresentable.rawValue.
         // swiftlint:disable:next chained_rawvalue_access_anti_pattern
+        // swift-linter:disable:next raw value access
+        // swift-linter:disable:next chained rawvalue access
+        // REASON: this extension IS the RawRepresentable boundary's bottom-out implementation (see file header); there is no typed alternative to rawValue here.
         for byte in value.rawValue.utf8 {
             buffer.append(ASCII.Code(byte))
         }
@@ -61,6 +64,8 @@ where
         _ value: borrowing Self,
         into buffer: inout Buffer
     ) where Buffer.Element == ASCII.Code {
+        // swift-linter:disable:next raw value access
+        // REASON: this extension IS the RawRepresentable boundary's bottom-out implementation (see file header); there is no typed alternative to rawValue here.
         for byte in value.rawValue {
             buffer.append(ASCII.Code(unchecked: byte))
         }

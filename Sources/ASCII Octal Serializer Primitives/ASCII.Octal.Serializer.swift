@@ -34,6 +34,9 @@ extension ASCII.Octal.Serializer: Serializer.`Protocol` {
     /// The failure type; octal serialization never fails.
     public typealias Failure = Never
 
+    /// This leaf conformer has no delegating `body`.
+    public typealias Body = Never
+
     /// Appends the octal ASCII digits of `output` to `buffer`.
     ///
     /// `0` is written as the single digit `'0'`; negative signed values are

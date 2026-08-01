@@ -5,7 +5,8 @@ import Testing
 @Suite
 struct `ASCII.Binary.Serializer Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
 // MARK: - Unit Tests
@@ -50,7 +51,7 @@ extension `ASCII.Binary.Serializer Tests`.Unit {
 
 // MARK: - Edge Cases
 
-extension `ASCII.Binary.Serializer Tests`.EdgeCase {
+extension `ASCII.Binary.Serializer Tests`.`Edge Case` {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Binary.Serializer<UInt8>()

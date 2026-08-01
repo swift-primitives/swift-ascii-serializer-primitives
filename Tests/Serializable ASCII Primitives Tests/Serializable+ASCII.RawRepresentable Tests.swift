@@ -67,6 +67,9 @@ extension Command.Test.Unit {
         // (String rawValue's UTF-8 view) to assert byte-equivalence; no typed
         // retag()/map() path exists from Swift.RawRepresentable.rawValue.
         // swiftlint:disable:next chained_rawvalue_access_anti_pattern
+        // swift-linter:disable:next raw value access
+        // swift-linter:disable:next chained rawvalue access
+        // REASON: test reproduces the flat default's own bottom-out rawValue projection (see comment above); no typed alternative exists.
         let expected = value.rawValue.utf8.map { ASCII.Code($0) }
         #expect(value.asciiCodes == expected)
     }
@@ -99,6 +102,9 @@ extension Frame.Test.Unit {
         // ([Byte] rawValue mapped directly) to assert byte-equivalence; no typed
         // retag()/map() path exists from Swift.RawRepresentable.rawValue.
         // swiftlint:disable:next chained_rawvalue_access_anti_pattern
+        // swift-linter:disable:next raw value access
+        // swift-linter:disable:next chained rawvalue access
+        // REASON: test reproduces the flat default's own bottom-out rawValue projection (see comment above); no typed alternative exists.
         let expected = value.rawValue.map { ASCII.Code(unchecked: $0) }
         #expect(value.asciiCodes == expected)
     }

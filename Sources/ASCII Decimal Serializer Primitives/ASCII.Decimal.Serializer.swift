@@ -34,6 +34,9 @@ extension ASCII.Decimal.Serializer: Serializer.`Protocol` {
     /// The failure type; decimal serialization never fails.
     public typealias Failure = Never
 
+    /// This leaf conformer has no delegating `body`.
+    public typealias Body = Never
+
     /// Appends the decimal ASCII digits of `output` to `buffer`.
     ///
     /// `0` is written as the single digit `'0'`; negative signed values are

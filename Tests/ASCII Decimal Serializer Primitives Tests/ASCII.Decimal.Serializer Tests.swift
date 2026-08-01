@@ -5,7 +5,8 @@ import Testing
 @Suite
 struct `ASCII.Decimal.Serializer Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
 // MARK: - Unit Tests
@@ -50,7 +51,7 @@ extension `ASCII.Decimal.Serializer Tests`.Unit {
 
 // MARK: - Edge Cases
 
-extension `ASCII.Decimal.Serializer Tests`.EdgeCase {
+extension `ASCII.Decimal.Serializer Tests`.`Edge Case` {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Decimal.Serializer<UInt8>()

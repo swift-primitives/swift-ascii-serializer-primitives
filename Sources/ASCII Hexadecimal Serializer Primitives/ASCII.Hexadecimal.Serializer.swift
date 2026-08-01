@@ -37,6 +37,9 @@ extension ASCII.Hexadecimal.Serializer: Serializer.`Protocol` {
     /// The failure type; hexadecimal serialization never fails.
     public typealias Failure = Never
 
+    /// This leaf conformer has no delegating `body`.
+    public typealias Body = Never
+
     /// Appends the lowercase hexadecimal ASCII digits of `output` to `buffer`.
     ///
     /// `0` is written as the single digit `'0'`; negative signed values are

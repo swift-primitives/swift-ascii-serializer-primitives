@@ -5,7 +5,8 @@ import Testing
 @Suite
 struct `ASCII.Hexadecimal.Serializer Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
 // MARK: - Unit Tests
@@ -57,7 +58,7 @@ extension `ASCII.Hexadecimal.Serializer Tests`.Unit {
 
 // MARK: - Edge Cases
 
-extension `ASCII.Hexadecimal.Serializer Tests`.EdgeCase {
+extension `ASCII.Hexadecimal.Serializer Tests`.`Edge Case` {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Hexadecimal.Serializer<UInt8>()

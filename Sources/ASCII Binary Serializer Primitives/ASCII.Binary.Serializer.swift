@@ -34,6 +34,9 @@ extension ASCII.Binary.Serializer: Serializer.`Protocol` {
     /// The failure type; binary serialization never fails.
     public typealias Failure = Never
 
+    /// This leaf conformer has no delegating `body`.
+    public typealias Body = Never
+
     /// Appends the binary ASCII digits of `output` to `buffer`.
     ///
     /// `0` is written as the single digit `'0'`; negative signed values are

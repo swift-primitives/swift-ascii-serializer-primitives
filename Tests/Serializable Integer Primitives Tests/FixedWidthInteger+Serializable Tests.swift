@@ -2,8 +2,12 @@ import ASCII_Primitives
 import Serializable_Integer_Primitives
 import Testing
 
-@Suite("Serializable Integer Conformances")
-struct SerializableIntegerTests {
+@Suite
+struct `Serializable Integer Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+
     @Test
     func `Int serializes via Serializable`() {
         let codes = Int(42).asciiCodes

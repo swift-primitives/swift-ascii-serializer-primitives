@@ -5,7 +5,8 @@ import Testing
 @Suite
 struct `ASCII.Octal.Serializer Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
 // MARK: - Unit Tests
@@ -50,7 +51,7 @@ extension `ASCII.Octal.Serializer Tests`.Unit {
 
 // MARK: - Edge Cases
 
-extension `ASCII.Octal.Serializer Tests`.EdgeCase {
+extension `ASCII.Octal.Serializer Tests`.`Edge Case` {
     @Test
     func `serializes UInt8 max`() {
         let serializer = ASCII.Octal.Serializer<UInt8>()

@@ -8,7 +8,8 @@ import Testing
 @Suite
 struct `RangeReplaceableCollection+ASCII.Decimal Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
 extension `RangeReplaceableCollection+ASCII.Decimal Tests`.Unit {
@@ -41,7 +42,7 @@ extension `RangeReplaceableCollection+ASCII.Decimal Tests`.Unit {
     }
 }
 
-extension `RangeReplaceableCollection+ASCII.Decimal Tests`.EdgeCase {
+extension `RangeReplaceableCollection+ASCII.Decimal Tests`.`Edge Case` {
     @Test
     func `appends zero as a single '0'`() {
         var buffer: [ASCII.Code] = []
